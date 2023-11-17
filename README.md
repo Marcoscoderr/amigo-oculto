@@ -5,4 +5,6 @@ Como utilizar:
 
 1 - Insira o nome e e-mail de cada participante
 
-O sistema fará o sorteio e separação dos participantes e enviará via e-mail...
+O sistema fará o sorteio e separação dos participantes e enviará via e-mail
+
+EXPLICAR TUDO>>>>>>
