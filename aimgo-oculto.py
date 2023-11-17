@@ -16,10 +16,13 @@ def main():
     def mistura_lista():
         
         return
+    #Definição dos participantes
     
     #Conferindo se o participante não tirou ele mesmo
+   
 
     #Conferindo se os participantes já não sairam juntos anteriormente
+
 
     #Enviado via e-mail para os participantes informando quem eles devem presentear
     def envio_email():
