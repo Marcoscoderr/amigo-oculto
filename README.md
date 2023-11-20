@@ -8,3 +8,5 @@ Como utilizar:
 O sistema fará o sorteio e separação dos participantes e enviará via e-mail
 
 EXPLICAR TUDO>>>>>>>
+
+atualização
