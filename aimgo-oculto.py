@@ -30,11 +30,13 @@ def main():
             print(cadastro_participantes)
             print(nome_participantes)
             print(len(cadastro_participantes))
+            lista = random.shuffle(nome_participantes)
+            print(lista)
 
             novo = input("Gostaria de inserir mais um participante? s-SIM / n-NÃO: ")
 
             #Tratamento de erro para que seja inseridos no mínimo 3 participantes
-            if len(cadastro_participantes) < 4:
+            if novo =="n" and len(cadastro_participantes) < 3:
                 raise ValueError("Mínimo de 3 participantes!")
 
             #Voltar a solicitar usuário - INCOMPLETO    
@@ -48,23 +50,23 @@ def main():
     except Exception as error:
         print(error)
 
-    #Misturando a lista
-    def mistura_lista():
-        
-        return
+#Misturando a lista
+def mistura_lista():
     
-    #Definição dos participantes
-    
-    #Conferindo se o participante não tirou ele mesmo
-   
+    return
 
-    #Conferindo se os participantes já não sairam juntos anteriormente
+#Definição dos participantes
+
+#Conferindo se o participante não tirou ele mesmo
 
 
-    #Enviado via e-mail para os participantes informando quem eles devem presentear
-    def envio_email():
+#Conferindo se os participantes já não sairam juntos anteriormente
 
-        return
+
+#Enviado via e-mail para os participantes informando quem eles devem presentear
+def envio_email():
+
+    return
 
 
 #Main inicial
