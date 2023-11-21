@@ -16,10 +16,10 @@ def main():
     novo_participante = ""
 
     #Menu com opções??? (Inserir participante, excluir participante, sortear, sair...)
+    # No menu pode ter a quantidade de participantes já cadastrados
 
-
-    #Solicitação que o usuário digite o nome e e-mail de cada participante
     #DEVE SER UMA FUNCAO????
+    #Solicitação que o usuário digite o nome e e-mail de cada participante
     while novo_participante != "n":
         try:
             nome = input("Digite o nome do participante: ")
