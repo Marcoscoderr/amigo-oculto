@@ -82,7 +82,7 @@ def main():
             for pessoa in cadastro_participantes:
                 print(f"Nome: {pessoa} - E-mail: {cadastro_participantes[pessoa]}")
                 #Pausa para leitura do usuário
-                sleep(5)
+                sleep(3)
 
 
         # Opção 4 - Realizar sorteio
@@ -113,17 +113,20 @@ def mistura_lista(lista):
 def adicionar_participante():
     """Função para tratar o nome e o e-mail que será adicionado a lista
 
-    Returns:
-        nome: str Nome do participante
-        email : str Email do participante
-    """    
+Returns:
+    nome: str Nome do participante
+    email : str Email do participante
+"""    
     nome = input("Digite o nome do participante: ")
+    
     #Tratamento do nome
+    nome = nome.upper().strip().replace("  ", " ")
 
+    #Tratamento do e-mail - INCOMPLETO
     email = input(f"Digite o e-mail de {nome}: ")
-
-    #Tratamento do e-mail
-
+    if "@" and "." not in email:
+        print("Digite o e-mail corretamente!")
+    
     return nome, email
 
 #Função para remover participante
