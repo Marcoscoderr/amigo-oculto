@@ -196,12 +196,14 @@ def realizar_sorteio(dicionario, lista, dicionario_sorteados):
             print(error)
                 
 #Funcão para enviar email aos participantes
-def envio_email():
+def envio_email(dicionario, dicionario_sorteados):
 
     return
 
 #Funcão para pressionar qualquer tecla para continuar
 def pressione_tecla():
+    """Função que pede o cliente para pressionar ENTER para voltar ao menu
+    """
     input("Pressione enter para continuar...")
     return
 
