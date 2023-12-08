@@ -93,24 +93,31 @@ def adicionar_participante(dicionario, lista):
     Returns:
     nome: str Nome do participante
     email : str Email do participante
-    """    
-    nome = input("\nDigite o nome do participante: ")
-    
-    #Tratamento do nome
-    nome = nome.upper().strip().replace("  ", " ")
+    """  
+    try:  
+        nome = input("\nDigite o nome do participante: ")
+        if not nome:
+            raise ValueError("Nome não pode ser vazio")
+        #Tratamento do nome
+        nome = nome.upper().strip().replace("  ", " ")
 
-    #Tratamento do e-mail - INCOMPLETO
-    email = input(f"Digite o e-mail de {nome}: ")
-    # if "@" and "." not in email:
-    #     print("Digite o e-mail corretamente!")
+        #Tratamento do e-mail - INCOMPLETO
+        email = input(f"Digite o e-mail de {nome}: ")
+        if not email:
+            raise ValueError("E-mail não pode ser vazio")
+        # if "@" and "." not in email:
+        #     print("Digite o e-mail corretamente!")
 
-    #Inserindo participante no dicionário
-    #dados[0] -> nome // dados[1] -> email
-    dicionario[nome] = email
-    #Inserindo nome do participante na lista que será sorteada
-    lista.append(nome)
+        #Inserindo participante no dicionário
+        #dados[0] -> nome // dados[1] -> email
+        dicionario[nome] = email
+        #Inserindo nome do participante na lista que será sorteada
+        lista.append(nome)
+        print("Participante adicionado!\n")
+    except Exception as error:
+        print(error)
 
-    return print("Participante adicionado!\n")
+    return 
 
 #Função para remover participante
 def remover_participante(diconario, lista):
@@ -123,29 +130,35 @@ def remover_participante(diconario, lista):
     Returns:
         String: Mensagem de confirmação de exclusão do participante
     """    
-    print("\nQual participante você deseja remover? ou 's' para sair.")
-    for nome in lista:
-        print(nome, end="\n")
-    eliminar = input("Digite o nome: ")
-                
-    #Tratamento nome
-    eliminar = eliminar.upper()
+    try:  
+        print("\nQual participante você deseja remover? ou 's' para sair.")
+        for nome in lista:
+            print(nome, end="\n")
+        eliminar = input("Digite o nome: ")
+        if not eliminar:
+            raise ValueError("Nome não pode ser vazio")
+                    
+        #Tratamento nome
+        eliminar = eliminar.upper()
 
-    #S para sair e não eliminar ninguem
-    if eliminar == "S" :
-        return print("\nSolicitação de exclusão cancelada!")
-    
-    #Caso tenha inserido um nome, verificar se está na lista
-    elif eliminar in lista:
-
-        #Apaga o participante no dicionário e na lista
-        diconario.pop(eliminar)
-        lista.remove(eliminar)
-    else:
-        return print(f"\nO participante {eliminar} não está na lista!\n")
+        #S para sair e não eliminar ninguem
+        if eliminar == "S" :
+            return print("\nSolicitação de exclusão cancelada!")
         
-    return print(f"{eliminar} foi retirado da lista!\n")
+        #Caso tenha inserido um nome, verificar se está na lista
+        elif eliminar in lista:
+
+            #Apaga o participante no dicionário e na lista
+            diconario.pop(eliminar)
+            lista.remove(eliminar)
+            print(f"{eliminar} foi retirado da lista!\n")
+        else:
+            return print(f"\nO participante {eliminar} não está na lista!\n")
+    except Exception as error:
+        print(error)
             
+        return 
+                
 #Funcão para apresentar a lista de participates
 def mostrar_participantes(dicionario):
     """Função para apresentar os participantes registrados
@@ -175,20 +188,42 @@ def realizar_sorteio(dicionario, lista, dicionario_sorteados):
                 sleep(1)
             print("\n")
             
-            print(lista) 
-            for nome in dicionario:
+            print(lista)
 
-                #Conferindo se o participante não tirou ele mesmo
-                #Vai ter que ser feito durante o sorteio para não ter o risco de travar no último
-                #ou se o ultimo estiver igual recomeçar tudo outra vez
-
-                #Conferindo se os participantes já não sairam juntos anteriormente
+            #Criada uma lista interna que copia a lista de nomes que será sorteada
+            #Na linha 204, caso seja necessário reiniciar o processo, a lista original
+            #não pode ser apagada com .pop utilizada na linha 198
+            lista_interna_sorteio  = lista.copy()
+            for presenteador in dicionario:
+                sorteado = lista[0]
                 
-                #Retira o nome da lista envia para o dicionario de sorteados
-                sorteado = lista.pop(0)
+                #Conferindo se o participante não tirou ele mesmo
+                if presenteador == sorteado:
+                    print(f"{presenteador} tirou {sorteado}")
+                    print("MESMO NOME!")
+                    #Mistura a lista novamente
+                    mistura_lista(lista)
 
-                dicionario_sorteados[nome] = sorteado
-                print(lista)
+                    #Conferindo se os participantes já não sairam juntos anteriormente
+
+                else:
+                    #Se não for o mesmo nome continua o sorteio
+                    #Retira o nome da lista envia para o dicionario de sorteados
+                    sorteado = lista_interna_sorteio.pop(0)
+                    print(f"{presenteador} tirou {sorteado}")
+                    dicionario_sorteados[presenteador] = sorteado
+                    print(lista_interna_sorteio)
+                #Se o ultimo estiver igual recomeçar tudo outra vez
+                if len(lista_interna_sorteio) == 1 and presenteador == sorteado:
+                    print("Último igual, recomeçando")
+                    dicionario_sorteados.clear()
+                    #Recomeça o sorteio do zero
+                    realizar_sorteio(dicionario, lista, dicionario_sorteados)
+                    
+                    
+                
+                
+               
             print(dicionario_sorteados)
             
       
