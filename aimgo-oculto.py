@@ -173,7 +173,7 @@ def mostrar_participantes(dicionario):
     print("\n")
     return
 
-#Função para definição dos participantes
+#Função para realizar sorteio dos participantes
 def realizar_sorteio(dicionario, lista, dicionario_sorteados):
     try:
         #Tratamento de erro para que seja inseridos no mínimo 3 participantes
@@ -190,9 +190,9 @@ def realizar_sorteio(dicionario, lista, dicionario_sorteados):
             
             print(lista)
 
-            #Criada uma lista interna que copia a lista de nomes que será sorteada
+            #Criada uma lista interna que copia a lista de nomes que será sorteada porque
             #Na linha 204, caso seja necessário reiniciar o processo, a lista original
-            #não pode ser apagada com .pop utilizada na linha 198
+            #não pode ser reutilizada pois estaria sendo apagada com .pop, conforme utilizada na linha 212.Ao ser sorteado, o nome é apagado da lista para não ser sorteado novamente.
             lista_interna_sorteio  = lista.copy()
             for presenteador in dicionario:
                 sorteado = lista[0]
