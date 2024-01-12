@@ -1,6 +1,8 @@
 import random
 from random import shuffle
 from time import sleep
+import smtplib
+import email.message
 
 #Função principal
 def main():
@@ -68,12 +70,15 @@ def main():
         # Opção 3 - Ver lista de participantes
         if escolha == "3":
             mostrar_participantes(cadastro_participantes)
+            #envio_email()
             pressione_tecla()
 
         # Opção 4 - Realizar sorteio
         if escolha == "4":
             realizar_sorteio(cadastro_participantes, nome_participantes, sorteados)
             pressione_tecla()
+
+
                 
 
 #Misturando a lista
@@ -164,7 +169,7 @@ def mostrar_participantes(dicionario):
     """Função para apresentar os participantes registrados
 
     Args:
-        dicionario (string): Chave: Nome usuário / Chave: Email do usuário
+        dicionario (string): Chave: Nome usuário / Valor: Email do usuário
     """
     
     print("\nLista de Participantes: \n")
@@ -204,6 +209,9 @@ def realizar_sorteio(dicionario, lista, dicionario_sorteados):
                 if presenteador == sorteado:
                     print(f"{presenteador} tirou {sorteado}")
                     print("MESMO NOME!")
+
+                    #CORRIGIR - quando o nome é o mesmo, o for pula a pessoa da vez
+
                     #Mistura a lista novamente
                     mistura_lista(lista)
 
@@ -234,13 +242,45 @@ def realizar_sorteio(dicionario, lista, dicionario_sorteados):
             print(error)
                 
 #Funcão para enviar email aos participantes
-def envio_email(dicionario, dicionario_sorteados):
+def envio_email(): # argumentos retirados para teste = dicionario, dicionario_sorteados
+    """Funçao para enviar email aos participantes
 
-    return
+    Args:
+        dicionario (string): Chave: Nome usuário / Chave: Email do usuário
+        dicionario_sorteados (string): Chave: nome do presenteador / Valor: Nome do presenteado
+    """
+    try:
+        corpo_email = """
+        <p> Opa, aqui vai um email teste do aplicativo de amigo oculto </p>
+
+    """
+        #Instância mensagem
+        msg = email.message.Message()
+
+        msg['Subject'] = "Descubra quem você tirou no amigo-oculto"
+        msg['From'] = "socram817@gmail.com"
+        msg["To"] = "dayanefalvess@mail.com"
+        senha = "mcyrqmepbbwclyxr"
+        msg.add_header('Content-Type', 'text/html')
+        msg.set_payload(corpo_email)
+        
+        s = smtplib.SMTP('smtp.gmail.com: 587')
+        s.starttls()
+
+        s.login(msg['From'], senha)
+        s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))
+        s.quit()
+
+        return print("email enviado")
+    
+    except ValueError as error:
+        print(error)
+
 
 #Funcão para pressionar qualquer tecla para continuar
 def pressione_tecla():
     """Função que pede o cliente para pressionar ENTER para voltar ao menu
+
     """
     input("Pressione enter para continuar...")
     return
