@@ -1,4 +1,4 @@
-import random
+seimport random
 from random import shuffle
 from time import sleep
 import smtplib
@@ -259,7 +259,7 @@ def envio_email(): # argumentos retirados para teste = dicionario, dicionario_so
 
         msg['Subject'] = "Descubra quem você tirou no amigo-oculto"
         msg['From'] = "socram817@gmail.com"
-        msg["To"] = "dayanefalvess@mail.com"
+        msg["To"] = "dayanefalvess@gmail.com"
         senha = "mcyrqmepbbwclyxr"
         msg.add_header('Content-Type', 'text/html')
         msg.set_payload(corpo_email)
