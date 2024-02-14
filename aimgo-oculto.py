@@ -1,4 +1,4 @@
-seimport random
+import random
 from random import shuffle
 from time import sleep
 import smtplib
